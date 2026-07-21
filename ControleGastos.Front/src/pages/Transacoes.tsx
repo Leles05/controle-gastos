@@ -188,32 +188,42 @@ export default function Transacoes() {
                 <th className="p-4">Descrição</th>
                 <th className="p-4">Valor</th>
                 <th className="p-4">Tipo</th>
-                <th className="p-4 text-center">Ações</th> {/* Coluna nova */}
+                <th className="p-4">Pessoa</th> {/* <--- Coluna Nova */}
+                <th className="p-4 text-center">Ações</th>
               </tr>
             </thead>
             <tbody>
-              {transacoes.map(t => (
-                <tr key={t.id} className="border-b border-slate-100">
-                  <td className="p-4">{t.descricao}</td>
-                  <td className="p-4 font-medium">R$ {t.valor.toFixed(2)}</td>
-                  <td className={`p-4 font-semibold ${t.tipo === 'Receita' ? 'text-green-600' : 'text-red-600'}`}>
-                    {t.tipo}
-                  </td>
-                  {/* Botão de excluir novo */}
-                  <td className="p-4 flex justify-center">
-                    <button 
-                      onClick={() => deletarTransacao(t.id)}
-                      className="text-red-500 hover:text-red-700 hover:bg-red-50 p-2 rounded-lg transition-all"
-                      title="Excluir lançamento"
-                    >
-                      <Trash2 size={20} />
-                    </button>
-                  </td>
-                </tr>
-              ))}
+              {transacoes.map(t => {
+                // O React atua como um detetive: cruza o ID da transação com o ID da lista de pessoas
+                const pessoaVinculada = pessoas.find(p => p.id === t.pessoaId);
+                const nomeDaPessoa = pessoaVinculada ? pessoaVinculada.nome : 'Desconhecida';
+
+                return (
+                  <tr key={t.id} className="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+                    <td className="p-4">{t.descricao}</td>
+                    <td className="p-4 font-medium">R$ {t.valor.toFixed(2).replace('.', ',')}</td>
+                    <td className={`p-4 font-semibold ${t.tipo === 'Receita' ? 'text-green-600' : 'text-red-600'}`}>
+                      {t.tipo}
+                    </td>
+                    {/* Renderizamos o nome descoberto na coluna nova */}
+                    <td className="p-4 text-slate-700 font-medium">{nomeDaPessoa}</td> 
+                    
+                    <td className="p-4 flex justify-center">
+                      <button 
+                        onClick={() => deletarTransacao(t.id)}
+                        className="text-red-500 hover:text-red-700 hover:bg-red-50 p-2 rounded-lg transition-all"
+                        title="Excluir lançamento"
+                      >
+                        <Trash2 size={20} />
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
               {transacoes.length === 0 && (
                 <tr>
-                  <td colSpan={4} className="p-8 text-center text-slate-400">
+                  {/* Atualizamos o colSpan de 4 para 5 para cobrir a largura total da tabela agora */}
+                  <td colSpan={5} className="p-8 text-center text-slate-400">
                     Nenhuma transação registrada.
                   </td>
                 </tr>
@@ -221,7 +231,7 @@ export default function Transacoes() {
             </tbody>
           </table>
         </div>
-      </div>
-    </div>
+      </div> 
+    </div>   
   );
 }
