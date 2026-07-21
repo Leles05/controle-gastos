@@ -1,7 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Pessoas from './pages/Pessoas';
-import Transacoes from './pages/Transacoes'; // Importação nova
+import Transacoes from './pages/Transacoes';
+import Dashboard from './pages/Dashboard'; 
 
 export default function App() {
   return (
@@ -11,11 +12,10 @@ export default function App() {
         
         <main className="max-w-6xl mx-auto p-6">
           <Routes>
-            <Route path="/" element={<h1 className="text-3xl font-bold">Em breve: Dashboard</h1>} />
-            <Route path="/pessoas" element={<Pessoas />} />
+            <Route path="/" element={<Dashboard />} /> 
             
-            {/* Rota atualizada */}
-            <Route path="/transacoes" element={<Transacoes />} /> 
+            <Route path="/pessoas" element={<Pessoas />} />
+            <Route path="/transacoes" element={<Transacoes />} />
           </Routes>
         </main>
       </div>
