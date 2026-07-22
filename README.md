@@ -33,31 +33,27 @@ O repositório foi organizado agrupando o Back-end e o Front-end no mesmo local 
 ```bash
 git clone [https://github.com/Leles05/controle-gastos.git](https://github.com/Leles05/controle-gastos.git)
 cd controle-gastos
+```
 
 3. Executando o Back-end (API)
 Abra um terminal e execute os seguintes comandos:
 
-Bash
+```bash
 cd ControleGastos.Api
 dotnet restore
 dotnet run
+```
 A API estará rodando em http://localhost:5157.
 
 4. Executando o Front-end (React)
 Abra um novo terminal na pasta raiz do projeto e execute:
 
-Bash
+```bash
 cd ControleGastos.Front
 npm install
 npm run dev
+```
 
-### Salvando a Correção
-Depois de colar isso e salvar o arquivo, o visual vai se alinhar perfeitamente lá no GitHub. Para mandar essa correção para a nuvem, rode os comandos no terminal:
-
-```bash
-git add README.md
-git commit -m "docs: corrige formatacao dos blocos de codigo no readme"
-git push
 
 Acesse http://localhost:5173 no seu navegador para utilizar o sistema.
 
